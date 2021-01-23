@@ -1,0 +1,13 @@
+---
+- hosts: webservers
+
+  tasks:
+    - name: Set Up The Docker Repository
+      apt:
+        update_cache: yes
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg-agent
+          - software-properties-common
