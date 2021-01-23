@@ -36,6 +36,10 @@
         name: docker-ce
         state: latest
 
+    - name: Install Docker Python Packages
+      pip:
+        name: docker
+
     - name: Create Hello World Container
       docker_container:
         name: "{{ container_name }}"
