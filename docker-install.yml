@@ -14,6 +14,7 @@
           - curl
           - gnupg-agent
           - software-properties-common
+          - python-pip
 
     - name: Add Docker GPG apt key
       apt_key:
@@ -34,3 +35,9 @@
         update_cache: yes
         name: docker-ce
         state: latest
+
+    - name: Create Hello World Container
+      docker_container:
+        name: "{{ container_name }}"
+        image: "{{ container_image }}"
+        state: present
