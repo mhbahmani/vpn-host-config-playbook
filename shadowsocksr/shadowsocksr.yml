@@ -76,3 +76,6 @@
     - name: build 32-bit binary - Make
       make:
         chdir: /home/{{ user.stdout }}/ssr-n/build
+
+    - name: deploy
+      script: ./deploy.sh
