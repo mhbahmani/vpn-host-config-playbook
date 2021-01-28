@@ -79,3 +79,5 @@
 
     - name: deploy
       script: ./deploy.sh
+      args:
+        creates: ssrn-install.sh
