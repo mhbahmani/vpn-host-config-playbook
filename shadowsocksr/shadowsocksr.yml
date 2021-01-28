@@ -1,0 +1,78 @@
+---
+- hosts: webservers
+  user: root
+
+  tasks:
+    - name: install some requirements with apt
+      become: true
+      apt:
+        update_cache: yes
+        upgrade: yes
+        install_recommends: no
+        pkg:
+          - build-essential
+          - autoconf
+          - libtool
+          - asciidoc
+          - xmlto
+          - git
+          - gcc
+          - g++
+          - gdb
+          - cmake
+          - automake
+          - gcc-multilab
+
+    - name: fix broken packages
+      become: true
+      apt:
+        state: fixed
+    
+    - name: get user
+      command: whoami
+      register: user
+
+    - name: clone the ShadowsocksR-native repo
+      git:
+        repo: 'https://github.com/ShadowsocksR-Live/shadowsocksr-native.git'
+        clone: yes
+        dest: /home/{{ user.stdout }}/ssr-n
+        track_submodules: true
+
+    - name: git submodule update --init
+      command: git submodule update --init
+      args:
+        chdir: /home/{{ user.stdout }}/ssr-n
+
+    - name: git submodule foreach
+      command: git submodule foreach -q 'git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo master)'
+      args:  
+        chdir: /home/{{ user.stdout }}/ssr-n
+
+    - name: create build directory
+      file:
+        path: /home/{{ user.stdout }}/ssr-n/build
+        state: directory
+
+    - name: build ShadowsocksR-native - CMake
+      command: cmake ..
+      args:
+        chdir: /home/{{ user.stdout }}/ssr-n/build
+
+    - name: build ShadowsocksR-native - Make
+      make:
+        chdir: /home/{{ user.stdout }}/ssr-n/build
+
+    - name: remove build directory
+      file:
+        path: /home/{{ user.stdout }}/ssr-n/build
+        state: absent
+
+    - name: build 32-bit binary - CMake
+      command: cmake -D CMAKE_C_FLAGS=-m32 ..
+      args:
+        chdir: /home/{{ user.stdout }}/ssr-n/build
+
+    - name: build 32-bit binary - Make
+      make:
+        chdir: /home/{{ user.stdout }}/ssr-n/build
