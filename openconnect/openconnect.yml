@@ -1,0 +1,13 @@
+- hosts: all
+  becemo: true
+
+  tasks:
+    - name: fire up openconnect server!
+      docker_container:
+        name: ovserv
+        image: tommylau/ocserv
+        ports:
+          - "443:443"
+          - "443:443/udp"
+        detach: yes
+        privileged: yes
