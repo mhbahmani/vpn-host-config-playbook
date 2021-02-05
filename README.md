@@ -10,7 +10,6 @@ You should have ansible installed. Set your hosts as `webservers` and make sure 
   - `ansible-playbook <playbook>`
 
 ## TODO:
-  * Openconnect
   * Shadowsocks
   
 ### Contribution:
