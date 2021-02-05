@@ -1,5 +1,5 @@
-- hosts: all
-  becemo: true
+- hosts: webservers
+  user: root
 
   tasks:
     - name: fire up openconnect server!
