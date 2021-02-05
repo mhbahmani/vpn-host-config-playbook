@@ -7,7 +7,7 @@ U can use this ansible playbooks to config a VPS setup a VPN or proxy on your se
   - [OpenConnect](https://github.com/mhbahmani/vpn-host-config-playbook/tree/master/openconnect)
 
 ## how to use:
-You should have ansible installed. Set your hosts as `webservers` and make sure you have access to root. Then, just run the command below:
+You should have ansible installed. Set your hosts as `vpnservers` and make sure you have access to root. Then, just run the command below:
   - `ansible-playbook <playbook>`
 
 ## TODO:
