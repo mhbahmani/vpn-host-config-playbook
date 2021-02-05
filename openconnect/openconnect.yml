@@ -1,4 +1,4 @@
-- hosts: webservers
+- hosts: vpnservers
   user: root
   gather_facts: no
 
