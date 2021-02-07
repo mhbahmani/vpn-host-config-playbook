@@ -1,13 +1,12 @@
 ---
 - hosts: vpnservers
-  user: root
+  user: ubuntu
+  become: true
+  gather_facts: no
 
   tasks:
     - name: install some requirements with apt
-      become: true
       apt:
-        update_cache: yes
-        upgrade: yes
         install_recommends: no
         pkg:
           - build-essential
@@ -21,7 +20,7 @@
           - gdb
           - cmake
           - automake
-          - gcc-multilab
+          - gcc-multilib
 
     - name: fix broken packages
       become: true
