@@ -79,7 +79,12 @@
     - name: download deploy script
       get_url:
         url: https://raw.githubusercontent.com/ShadowsocksR-Live/shadowsocksr-native/master/install/ssrn-install.sh
-        dest: /home/mohammadhosein/ssrn-install.sh
+        dest: /home/{{ user.stdout }}/ssr-n/ssrn-install.sh
       args:
         creates: ssrn-install.sh
         chdir: /home/{{ user.stdout }}/ssr-n
+
+    - name: changing perm of ssrn-install.sh
+      file:
+        dest: /home/{{ user.stdout }}/ssr-n/ssrn-install.sh
+        mode: +x
