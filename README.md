@@ -8,7 +8,7 @@ U can use this ansible playbooks to config a VPS setup a VPN or proxy on your se
 
 ## how to use:
 You should have ansible installed. Set your hosts as `vpnservers` and make sure you have access to root. Then, just run the command below:
-  - `ansible-playbook <playbook>`
+  - `ansible-playbook --ask-become-pass <playbook>`
 
 ## TODO:
   * Shadowsocks
