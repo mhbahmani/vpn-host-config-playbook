@@ -99,6 +99,10 @@
         dest: /home/{{ user.stdout }}/ssr-n/ssrn-install.sh
         mode: +x
 
+    - name: install pexpect
+      pip:
+        name: pexpect
+
     - name: deploy
       expect:
         command: /home/{{ user.stdout }}/ssr-n/ssrn-install.sh
