@@ -80,3 +80,4 @@
       script: ./deploy.sh
       args:
         creates: ssrn-install.sh
+        chdir: /home/{{ user.stdout }}/ssr-n
