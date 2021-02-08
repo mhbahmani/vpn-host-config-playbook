@@ -314,7 +314,7 @@ function pre_install() {
             hint="${obfs[$i-1]}"
             echo -e "${green}${i}${plain}) ${hint}"
         done
-        read -p "Which obfs you'd select(Default: ${obfs[3]}):" r_obfs
+        read -p "Which obfs you would select(Default: ${obfs[3]}):" r_obfs
         [ -z "$r_obfs" ] && r_obfs=4
         expr ${r_obfs} + 1 &>/dev/null
         if [ $? -ne 0 ]; then
@@ -580,8 +580,7 @@ function install_shadowsocksr() {
     pre_install
 
     echo
-    echo "Press any key to start...or Press Ctrl+C to cancel"
-    char=`get_char`
+    echo "Start"
 
     cd ${cur_dir}
 
