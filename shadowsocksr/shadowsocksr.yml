@@ -2,6 +2,16 @@
 - hosts: vpnservers
   user: ubuntu
   gather_facts: no
+  vars_files:
+    - ../vars/ssrn_vars.yml
+
+  vars_prompt:
+    - name: password
+      prompt: password?
+
+    - name: port
+      prompt: port number?
+      private: no
 
   tasks:
     - name: install some requirements with apt
@@ -88,3 +98,13 @@
       file:
         dest: /home/{{ user.stdout }}/ssr-n/ssrn-install.sh
         mode: +x
+
+    - name: deploy
+      expect:
+        command: /home/{{ user.stdout }}/ssr-n/ssrn-install.sh
+        responses:
+          '\(Default password: .*\):': "{{ password }}"
+          '\(Default port: .*\):': "{{ port }}"
+          'Which cipher you would select\(Default: .*\):': "{{ cipher }}"
+          'Which protocol you would select\(Default: .*\)': "{{ protocol }}" 
+          'Which obfs you would select\(Default: .*\):': "{{ obfs }}"
