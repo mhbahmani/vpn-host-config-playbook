@@ -1,11 +1,11 @@
 ---
 - hosts: vpnservers
   user: ubuntu
-  become: true
   gather_facts: no
 
   tasks:
     - name: install some requirements with apt
+      become: true
       apt:
         install_recommends: no
         pkg:
@@ -62,11 +62,6 @@
       make:
         chdir: /home/{{ user.stdout }}/ssr-n/build
 
-    - name: remove build directory
-      file:
-        path: /home/{{ user.stdout }}/ssr-n/build
-        state: absent
-
     - name: build 32-bit binary - CMake
       command: cmake -D CMAKE_C_FLAGS=-m32 ..
       args:
@@ -75,6 +70,11 @@
     - name: build 32-bit binary - Make
       make:
         chdir: /home/{{ user.stdout }}/ssr-n/build
+
+    - name: remove build directory
+      file:
+        path: /home/{{ user.stdout }}/ssr-n/build
+        state: absent
 
     - name: deploy
       script: ./deploy.sh
