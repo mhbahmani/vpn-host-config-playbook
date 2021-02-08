@@ -259,7 +259,7 @@ function pre_install() {
             # echo -e "${green}${i}${plain}) ${hint}"
             printf "%2d) %s\n" ${i} ${hint}
         done
-        read -p "Which cipher you'd select(Default: ${ciphers[8]}):" pick
+        read -p "Which cipher you would select(Default: ${ciphers[8]}):" pick
         [ -z "$pick" ] && pick=9
         expr ${pick} + 1 &>/dev/null
         if [ $? -ne 0 ]; then
@@ -287,7 +287,7 @@ function pre_install() {
             # echo -e "${green}${i}${plain}) ${hint}"
             printf "%2d) %s\n" ${i} ${hint}
         done
-        read -p "Which protocol you'd select(Default: ${protocols[2]}):" protocol
+        read -p "Which protocol you would select(Default: ${protocols[2]}):" protocol
         [ -z "$protocol" ] && protocol=3
         expr ${protocol} + 1 &>/dev/null
         if [ $? -ne 0 ]; then
