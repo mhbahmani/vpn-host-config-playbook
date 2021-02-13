@@ -31,6 +31,7 @@
           - cmake
           - automake
           - gcc-multilib
+          - python3-pexpect
 
     - name: fix broken packages
       become: true
