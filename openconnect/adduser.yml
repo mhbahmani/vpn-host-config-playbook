@@ -1,0 +1,21 @@
+---
+- hosts: vpnservers
+  user: ubuntu
+  become: true
+  gather_facts: no
+
+  vars_prompt:
+    - name: username
+      prompt: username?
+      private: no
+
+    - name: password
+      prompt: password?
+
+  tasks:
+    - name: add user
+      expect:
+        command: docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd -g "Route,All" {{ username }}
+        responses:
+          'Enter password:': "{{ password }}"
+          'Re-enter password:': "{{ password }}"
