@@ -1,0 +1,14 @@
+---
+- hosts: vpnservers
+  user: ubuntu
+  become: true
+  gather_facts: no
+
+  vars_prompt:
+    - name: username
+      prompt: username?
+      private: no
+
+  tasks:
+    - name: delete user
+      command: docker exec -it ocserv ocpasswd -c /etc/ocserv/ocpasswd -d {{ username }}
